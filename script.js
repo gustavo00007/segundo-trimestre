@@ -1,4 +1,3 @@
-
 const caixaPrincipal = document.querySelector(".caixa-principal");
 const caixaPerguntas = document.querySelector(".caixa-perguntas");
 const caixaAlternativas = document.querySelector(".caixa-alternativas");
@@ -7,7 +6,7 @@ const textoResultado = document.querySelector(".texto-resultado");
 
 const perguntas = [
     {
-        enunciado: "Logo após sair da escola, você se depara com uma nova tecnologia: um chat capaz de responder a todas as suas dúvidas, além de gerar imagens e áudios hiper-realistas. Qual é o seu primeiro pensamento?",
+        enunciado: "Ao sair da escola, você se depara com uma nova tecnologia: um chat que responde todas as dúvidas e gera imagens e áudios hiper-realistas. Qual é seu primeiro pensamento?",
         alternativas: [
             {
                 texto: "Isso é assustador!",
@@ -20,53 +19,53 @@ const perguntas = [
         ]
     },
     {
-        enunciado: "Com a descoberta desta tecnologia, chamada Inteligência Artificial, uma professora de tecnologia da escola decide oferecer uma série de aulas sobre o assunto. No final de uma das aulas, ela pede que você escreva um trabalho sobre o uso da IA na sala de aula. Qual é a sua atitude?",
+        enunciado: "Após a descoberta da Inteligência Artificial, uma professora decide fazer aulas sobre o tema. Ela pede que você escreva um trabalho sobre o uso de IA na educação. O que você faz?",
         alternativas: [
             {
-                texto: "Utiliza uma ferramenta de busca na internet que usa IA para ajudar a encontrar informações relevantes para o trabalho e explicar em uma linguagem que facilite o entendimento.",
+                texto: "Utiliza uma ferramenta de busca que usa IA para encontrar informações e explicar de forma acessível.",
                 afirmacao: "afirmação"
             },
             {
-                texto: "Escreve o trabalho com base em conversas com colegas, algumas pesquisas na internet e conhecimentos próprios sobre o tema.",
+                texto: "Baseia-se em conversas com colegas, pesquisas na internet e conhecimentos próprios.",
                 afirmacao: "afirmação"
             }
         ]
     },
     {
-        enunciado: "Após a elaboração do trabalho escrito, a professora realiza um debate com a turma para entender como foi feita a pesquisa e escrita. Durante a discussão, surge um ponto crucial: como a IA impacta o futuro do trabalho. Qual é a sua posição neste debate?",
+        enunciado: "Após elaborar o trabalho, a professora promove um debate sobre como a IA impacta o futuro do trabalho. Qual é sua posição?",
         alternativas: [
             {
-                texto: "Defende a ideia de que a IA pode criar novas oportunidades de emprego e melhorar habilidades humanas.",
+                texto: "Defende que a IA cria novas oportunidades e melhora habilidades humanas.",
                 afirmacao: "afirmação"
             },
             {
-                texto: "Preocupa-se com as pessoas que podem perder seus empregos para máquinas e defende a importância de proteger os trabalhadores.",
+                texto: "Preocupa-se com o impacto negativo da IA no emprego e defende a proteção dos trabalhadores.",
                 afirmacao: "afirmação"
             }
         ]
     },
     {
-        enunciado: "Ao final da discussão, é solicitado que você crie uma imagem no computador que represente sua visão sobre a IA. O que você faz?",
+        enunciado: "Você precisa criar uma imagem que represente sua visão sobre IA. Como você procede?",
         alternativas: [
             {
-                texto: "Cria uma imagem utilizando uma plataforma de design como o Paint.",
+                texto: "Cria uma imagem usando uma plataforma de design como o Paint.",
                 afirmacao: "afirmação"
             },
             {
-                texto: "Cria uma imagem utilizando um gerador de imagens de IA.",
+                texto: "Cria uma imagem usando um gerador de imagem de IA.",
                 afirmacao: "afirmação"
             }
         ]
     },
     {
-        enunciado: "Você tem um trabalho em grupo de biologia para entregar na semana seguinte, e o progresso está um pouco atrasado. Um membro do grupo decide usar a IA para ajudar na tarefa. O problema é que o trabalho está completamente idêntico ao do chat. O que você faz?",
+        enunciado: "Em um trabalho de biologia em grupo, um membro decide usar IA e o trabalho acaba igual ao do chat. O que você faz?",
         alternativas: [
             {
-                texto: "Acredita que escrever comandos para o chat é uma forma de contribuir com o trabalho, então não vê problema em utilizar o texto inteiro.",
+                texto: "Acha válido usar o texto do chat, desde que contribua com os comandos.",
                 afirmacao: "afirmação"
             },
             {
-                texto: "Reconhece que o chat é uma tecnologia avançada, mas entende que é essencial revisar o trabalho e contribuir com suas próprias perspectivas, já que toda máquina pode cometer erros.",
+                texto: "Revisa o trabalho e adiciona perspectivas pessoais, pois máquinas podem cometer erros.",
                 afirmacao: "afirmação"
             }
         ]
@@ -77,6 +76,17 @@ let atual = 0;
 let perguntaAtual;
 
 function mostraPergunta() {
+    // Limpa as alternativas da pergunta anterior
+    caixaAlternativas.innerHTML = '';
+
+    // Verifica se todas as perguntas já foram respondidas
+    if (atual >= perguntas.length) {
+        // Mostra resultado final ou realiza alguma ação
+        caixaPerguntas.textContent = "Você completou todas as perguntas!";
+        return;
+    }
+
+    // Define a pergunta atual
     perguntaAtual = perguntas[atual];
     caixaPerguntas.textContent = perguntaAtual.enunciado;
     mostraAlternativas();
@@ -89,8 +99,5 @@ function mostraAlternativas() {
         botaoAlternativas.addEventListener("click", function () {
             atual++;
             mostraPergunta();
-        })
-        caixaAlternativas.appendChild(botaoAlternativas);
-    }
-}
-mostraPergunta();
+        });
+        caixaAlternativas.appendChild(
